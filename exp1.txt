@@ -1,0 +1,2 @@
+1.  Ensure java 8 is installed in your system
+2. 

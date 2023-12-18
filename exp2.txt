@@ -1,0 +1,16 @@
+cd $HADOOP_DIR/sbin
+./start-all.bat
+hadoop -dfsadmin -safemode leave
+
+hadoop fs -mkdir /input_dir
+hadoop fs -put c:/.../input.txt
+hadoop fs -ls /input_dir
+hadoop dfs -cat /input_dir/input.txt
+
+hadoop jar MapReduceClient.jar wordcount /input_dir /output_dir
+hadoop fs -ls /output_dir
+hadoop dfs -cat /output_dir/*
+
+hadoop fs -rm -r /input_dir
+hadoop fs -rm -r /output_dir
+
