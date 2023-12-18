@@ -1,3 +1,4 @@
+# fileName, header, colClasses
 dataset = read.csv("data-marketing-budget-12mo.csv", header = T, 
 colClasses = c("numeric", "numeric", "numeric"))
 head(dataset,5)
@@ -8,7 +9,8 @@ head(dataset,5)
 #   4	4500	50044
 #   5	3000	34719
 
-# Simple Regression
+# Simple Regression. 
+# formula, data
 simple.fit = lm(Sales~Spend,data=dataset)
 summary(simple.fit)
 

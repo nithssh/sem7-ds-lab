@@ -1,8 +1,36 @@
 library(e1071)
 
-# Plot the entire Iris dataset
 plot(iris)
-iris
+plot(iris$Sepal.Length, iris$Speal.Width,  col=Iris$Species)
+plot(iris$Petal.Length, iris$Petal.Width,  col=Iris$Species)
+
+s <- sample(150, 100)
+cols <- c("Petal.Length", "Petal.Width", "Species")
+iris_train <- iris[s, cols]
+iris_test <- iris[-s, cols]
+
+# formula, data, kernel, cost, scale
+model.fit <- svm(Species ~ ., data = iris_train, kernel = "linear", cost = 0.1, scale=F)
+
+plot(model.fit, iris_train[, col])
+
+# formula, data, kernel, ranges
+tuned <- tune(svm, Species ~ ., data=iris_train, kernel = "linear", ranges = list(cost = c(0.001, 0.01, 0.1, 1, 10, 100)))
+
+p <- predict(model.fit, iris_test[, col], type="class")
+plot(p)
+
+# Create a confusion table and calculate accuracy
+table(p, iris_test[, 3])
+mean(p == iris_test[, 3])
+
+# -------------------------------------------------------------
+
+library(e1071)
+
+# Plot the entire Iris dataset
+head(iris)
+plot(iris)
 
 # Plot Sepal dimensions colored by Species
 plot(iris$Sepal.Length, iris$Sepal.width, col=iris$Species)
